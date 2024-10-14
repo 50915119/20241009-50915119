@@ -1,0 +1,288 @@
+/* 基本樣式 */
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f7; /* 基本背景色 */
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    animation: background-flash 3s infinite;
+}
+
+/* 加入潑漆效果 */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(50, 205, 50, 0.6) 10%, rgba(0, 255, 0, 0.3) 40%, rgba(34, 139, 34, 0.1) 80%);
+    pointer-events: none;
+    z-index: -1; /* 保持在內容區域下面 */
+    transform: rotate(-10deg);
+    animation: splatter 3s infinite;
+}
+
+/* 潑漆效果的動畫 */
+@keyframes splatter {
+    0% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+
+/* 標題 h1 */
+h1 {
+    font-size: 56px;
+    color: rgb(245, 76, 9);
+    animation: shake 0.5s infinite, rgb-flash 1.5s infinite;
+    display: inline-block;
+}
+
+/* 副標題 h3 */
+h3 {
+    font-size: 24px;
+    color: rgb(207, 9, 214);
+    animation: shake 2s infinite, rgb-flash 2s infinite;
+    display: inline-block;
+}
+
+/* 開始按鈕 */
+#start-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: #edfd09;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#start-button:hover {
+    background-color: #1976D2;
+    transform: scale(1.05);
+}
+
+#start-button:active {
+    transform: scale(0.98);
+}
+
+/* 控制按鈕 (翻轉所有卡片、返回卡片) */
+#flip-all-cards-button, #flip-back-cards-button {
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#flip-all-cards-button:hover, #flip-back-cards-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#flip-all-cards-button:active, #flip-back-cards-button:active {
+    transform: scale(0.98);
+}
+
+/* 顯示/隱藏配對圖片按鈕 */
+#toggle-matched-images-button {
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: #2196F3;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#toggle-matched-images-button:hover {
+    background-color: #1976D2;
+    transform: scale(1.05);
+}
+
+#toggle-matched-images-button:active {
+    transform: scale(0.98);
+}
+
+/* 選擇遊戲難度 */
+#level-selector {
+    background-color: #ffffff;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#level-selector:hover {
+    border-color: #45a049;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#level-selector:focus {
+    outline: none;
+    border-color: #3e8e41;
+    box-shadow: 0 0 8px rgba(62, 142, 65, 0.6);
+}
+
+#level-selector option {
+    padding: 10px;
+}
+
+/* 遊戲區域 (卡片) */
+#game-board {
+    display: grid;
+    gap: 10px;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+#game-board:hover {
+    transform: scale(1.02);
+}
+
+#game-board.small {
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(2, 150px);
+    width: 320px;
+    height: 320px;
+}
+
+#game-board.medium {
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    width: 440px;
+    height: 440px;
+}
+
+#game-board.large {
+    grid-template-columns: repeat(6, 80px);
+    grid-template-rows: repeat(6, 80px);
+    width: 540px;
+    height: 540px;
+}
+
+/* 卡片 */
+.card {
+    width: 100px;
+    height: 100px;
+    background-image: url('NBA9.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.card.flipped img {
+    display: block;
+}
+
+.card.matched {
+    visibility: hidden;
+}
+
+/* 倒數計時器 */
+#timer {
+    font-size: 26px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 20px;
+    animation: shake 1s infinite;
+}
+
+/* 遊戲結束訊息 */
+.end-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid #4CAF50;
+    font-size: 20px;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 10;
+}
+
+.end-message.fade-in {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 響應式設計 (手機) */
+@media (max-width: 768px) {
+    #game-board.small {
+        grid-template-columns: repeat(2, 120px);
+        grid-template-rows: repeat(2, 120px);
+        width: 250px;
+        height: 250px;
+    }
+
+    #game-board.medium {
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        width: 350px;
+        height: 350px;
+    }
+
+    #game-board.large {
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(4, 80px);
+        width: 400px;
+        height: 400px;
+    }
+
+    #start-button, #flip-all-cards-button, #flip-back-cards-button, #toggle-matched-images-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
